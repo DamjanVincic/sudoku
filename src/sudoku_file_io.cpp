@@ -13,13 +13,20 @@ std::vector<std::vector<unsigned short>> SudokuFileIO::read(const std::string& f
 
     if (file.is_open()) {
         std::string line;
-        int i = 0;
-        std::vector<std::vector<unsigned short>> board(9, std::vector<unsigned short>(9, 0));
-        while (getline(file, line)) {
-            for (int j = 0; j < line.length(); ++j) {
-                board[i][j] = line[j] == ' ' ? 0 : line[j] - '0';
+        std::vector<std::vector<unsigned short>> board;
+        std::vector<unsigned short> row;
+        while (std::getline(file, line)) {
+            for (char& c : line) {
+                if (isdigit(c)) {
+                    row.push_back(c - '0');
+                } else if (c == '.') {
+                    row.push_back(0);
+                }
             }
-            ++i;
+            if (!row.empty()) {
+                board.push_back(row);
+                row.clear();
+            }
         }
         file.close();
         return board;
@@ -35,13 +42,21 @@ void SudokuFileIO::write(const std::string& filename, const Sudoku9& sudoku) {
     if (file.is_open()) {
         Board board = sudoku.getBoard();
         for (int i = 0; i < 9; ++i) {
-            std::string line;
-            for (int j = 0; j < 9; ++j) {
-                line += board[i][j] == 0 ? ' ' : board[i][j] + '0';
+            if (i % 3 == 0 && i != 0) {
+                file << "------+-------+------" << std::endl;
             }
-            file << line << std::endl;
+            for (int j = 0; j < 9; ++j) {
+                if (j % 3 == 0 && j != 0) {
+                    file << "| ";
+                }
+                if (board[i][j] == 0)
+                    file << '.';
+                else
+                    file << board[i][j];
+                file << " ";
+            }
+            file << std::endl;
         }
-        file.close();
     }
     else {
         throw std::runtime_error("Unable to open file");
