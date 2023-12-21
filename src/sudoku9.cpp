@@ -20,6 +20,7 @@ Sudoku9& Sudoku9::operator=(const Sudoku9& other) {
         // }
         board = other.getBoard();
         originalBoard = other.getOriginalBoard();
+        numberOfValidCells = numberOfInvalidCells = 0;
     }
     return *this;
 }
@@ -55,7 +56,10 @@ void Sudoku9::generateSudoku() {
     srand(time(nullptr));
     board.fillDiagonalSubgrids();
     solveSudoku();
-    int numToRemove = rand() % 50 + 20;
+    int max = 81 - 17; // At least 17 squares must be available
+    int min = 81/2; // At least half of the squares to be removed for optimal difficulty
+//    int min = 9*3; // At least 3 numbers removed from each subgrid (on average)
+    int numToRemove = rand() % (max - min + 1) + min;
     for (int i = 0; i < numToRemove; ++i) {
         int row = rand() % 9;
         int col = rand() % 9;
