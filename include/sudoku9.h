@@ -8,6 +8,7 @@
 #ifndef SUDOKU_SUDOKU9_H
 #define SUDOKU_SUDOKU9_H
 #include <vector>
+#include "board.h"
 
 /**
  * @class Sudoku9
@@ -15,9 +16,14 @@
  */
 class Sudoku9 {
     /**
-     * @brief 2D vector representing the sudoku board
-     */
-    std::vector<std::vector<unsigned short>> board;
+     * @brief Board object representing the original sudoku board
+    */
+    Board originalBoard;
+
+    /**
+     * @brief Board object representing the sudoku board
+    */
+    Board board;
 
     /**
      * @brief Number of valid cells in the sudoku board
@@ -33,20 +39,6 @@ class Sudoku9 {
      * @brief Number of games played
     */
     static int numberOfGames;
-
-    /**
-     * @brief Fill the diagonal subgrids of the sudoku board
-     */
-    void fillDiagonalSubgrids();
-
-    /**
-     * @brief Checks if a number can be placed in a given cell
-     * @param row Row of the cell
-     * @param col Column of the cell
-     * @param num Number to be placed
-     * @return True if the number can be placed, false otherwise
-     */
-    bool isSafe(int row, int col, unsigned short num);
 public:
     /**
      * @brief Empty constructor for the Sudoku9 class
@@ -66,6 +58,18 @@ public:
     Sudoku9& operator=(const Sudoku9& other);
 
     /**
+     * @brief Returns the original sudoku board
+     * @return The original sudoku board
+     */
+    Board getOriginalBoard() const;
+
+    /**
+     * @brief Returns the solved sudoku board
+     * @return Solved sudoku board
+     */
+    Board getBoard() const;
+
+    /**
      * @brief Solves the sudoku board
      * @return True if the sudoku is solved, false otherwise
      */
@@ -75,11 +79,6 @@ public:
      * @brief Generates a sudoku board
      */
     void generateSudoku();
-
-    /**
-     * @brief Prints the sudoku board
-     */
-    void printBoard();
 
     /**
      * @brief Checks if the sudoku board is solved, and updates the corresponding attributes.
@@ -104,7 +103,10 @@ public:
     */
     static int& numberOfGamesPlayed();
 
-    std::vector<unsigned short> operator[](int i);
-    const std::vector<unsigned short> operator[](int i) const;
+    /**
+     * @brief Sets the solution of the sudoku board
+     * @param solution The solution of the sudoku board
+     */
+    void setSolution(const std::vector<std::vector<unsigned short>>& solution);
 };
 #endif //SUDOKU_SUDOKU9_H

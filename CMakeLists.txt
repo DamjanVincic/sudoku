@@ -8,4 +8,6 @@ add_executable(sudoku
         src/sudoku9.cpp
         include/sudoku9.h
         src/sudoku_file_io.cpp
-        include/sudoku_file_io.h)
+        include/sudoku_file_io.h
+        src/board.cpp
+        include/board.h)

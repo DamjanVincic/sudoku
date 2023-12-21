@@ -8,7 +8,7 @@
 #include "../include/sudoku_file_io.h"
 #include <fstream>
 
-Sudoku9 SudokuFileIO::read(const std::string& filename) {
+std::vector<std::vector<unsigned short>> SudokuFileIO::read(const std::string& filename) {
     std::ifstream file(filename);
 
     if (file.is_open()) {
@@ -22,7 +22,7 @@ Sudoku9 SudokuFileIO::read(const std::string& filename) {
             ++i;
         }
         file.close();
-        return Sudoku9(board);
+        return board;
     }
     else {
         throw std::runtime_error("Unable to open file");
@@ -30,13 +30,14 @@ Sudoku9 SudokuFileIO::read(const std::string& filename) {
 }
 
 void SudokuFileIO::write(const std::string& filename, const Sudoku9& sudoku) {
-   std::ofstream file(filename);
+    std::ofstream file(filename);
 
     if (file.is_open()) {
+        Board board = sudoku.getBoard();
         for (int i = 0; i < 9; ++i) {
             std::string line;
             for (int j = 0; j < 9; ++j) {
-                line += sudoku[i][j] == 0 ? ' ' : sudoku[i][j] + '0';
+                line += board[i][j] == 0 ? ' ' : board[i][j] + '0';
             }
             file << line << std::endl;
         }

@@ -20,7 +20,7 @@ public:
      * @brief Reads a sudoku board from a file.
      * @return Sudoku9 object
     */
-    Sudoku9 read(const std::string& filename);
+    std::vector<std::vector<unsigned short>> read(const std::string& filename);
 
     /**
      * @brief Writes a sudoku board to a file.

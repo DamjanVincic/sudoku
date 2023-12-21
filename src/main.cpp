@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 
         switch(choice) {
             case '1':
-                sudoku = sudokuFileIO.read(solutionFilename);
+                sudoku.setSolution(sudokuFileIO.read(solutionFilename));
                 break;
             case '2':
                 sudoku.solveSudoku();
