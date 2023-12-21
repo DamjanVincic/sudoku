@@ -115,7 +115,7 @@ void Sudoku9::printBoard() {
     }
 }
 
-bool Sudoku9::checkSolutionValidity() {
+void Sudoku9::checkSolution() {
     std::unordered_set<unsigned short> rowSet, colSet, boxSet;
 
     for (int i = 0; i < 9; ++i) {
@@ -125,22 +125,35 @@ bool Sudoku9::checkSolutionValidity() {
         for (int j = 0; j < 9; ++j) {
             if (board[i][j] != 0) {
                 if (rowSet.find(board[i][j]) != rowSet.end())
-                    return false;
+                    numberOfInvalidCells++;
                 rowSet.insert(board[i][j]);
             }
             if (board[j][i] != 0) {
                 if (colSet.find(board[j][i]) != colSet.end())
-                    return false;
+                    numberOfInvalidCells++;
                 colSet.insert(board[j][i]);
             }
             int boxRow = i - i % 3 + j / 3;
             int boxCol = i * 3 % 9 + j % 3;
             if (board[boxRow][boxCol] != 0) {
                 if (boxSet.find(board[boxRow][boxCol]) != boxSet.end())
-                    return false;
+                    numberOfInvalidCells++;
                 boxSet.insert(board[boxRow][boxCol]);
             }
         }
     }
-    return true;
 }
+
+int Sudoku9::getNumberOfValidCells() const {
+    return numberOfValidCells;
+}
+
+int Sudoku9::getNumberOfInvalidCells() const {
+    return numberOfInvalidCells;
+}
+
+int& Sudoku9::numberOfGamesPlayed() {
+    return numberOfGames;
+}
+
+int Sudoku9::numberOfGames = 0;

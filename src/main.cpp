@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
         std::cout << "[1] Load a sudoku board.\n"
                      "[2] Generate a sudoku board.\n"
                      ">> ";
+        
         std::cin >> choice;
 
         switch (choice) {
@@ -34,15 +35,15 @@ int main(int argc, char* argv[]) {
                 continue;
         }
 
-        std::cout << "[1] Check solution validity\n"
+        std::cout << "[1] Load solution\n"
                      "[2] Solve the sudoku\n"
                      ">> ";
+        
         std::cin >> choice;
 
         switch(choice) {
             case '1':
                 sudoku = sudokuFileIO.read(solutionFilename);
-                std::cout << (sudoku.checkSolutionValidity() ? "Solution valid." : "Solution invalid.") << std::endl;
                 break;
             case '2':
                 sudoku.solveSudoku();
@@ -52,6 +53,11 @@ int main(int argc, char* argv[]) {
                 std::cout << "Invalid input." << std::endl;
                 continue;
         }
+
+        sudoku.checkSolution();
+        std::cout << "Number of valid cells: " << sudoku.getNumberOfValidCells() << std::endl;
+        std::cout << "Number of invalid cells: " << sudoku.getNumberOfInvalidCells() << std::endl;
+        std::cout << "Number of games played: " << ++Sudoku9::numberOfGamesPlayed() << std::endl;
 
         std::cout << "[1] Continue\n"
                      "[2] Exit\n"
