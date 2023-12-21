@@ -39,15 +39,12 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
-.idea/
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
-.vscode/
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -83,7 +80,6 @@
 
 # CMake
 cmake-build-*/
-build/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
@@ -169,4 +165,28 @@ _deps
 # External projects
 *-prefix/
 
+### VisualStudioCode ###
+.vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# !.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
 # End of https://www.toptal.com/developers/gitignore/api/clion,c++,cmake
+
+.idea/
+build/
+*.txt
+!CMakeLists.txt

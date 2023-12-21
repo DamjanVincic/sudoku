@@ -67,6 +67,12 @@ public:
      */
     void printBoard();
 
+    /**
+     * @brief Checks if the sudoku board is valid
+     * @return True if the sudoku board is valid, false otherwise
+    */
+    bool checkSolutionValidity();
+
     std::vector<unsigned short> operator[](int i);
     const std::vector<unsigned short> operator[](int i) const;
 };

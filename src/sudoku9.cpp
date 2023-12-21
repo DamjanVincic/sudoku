@@ -7,6 +7,7 @@
 
 #include "../include/sudoku9.h"
 #include <iostream>
+#include <unordered_set>
 
 Sudoku9::Sudoku9() : board(std::vector<std::vector<unsigned short>>(9, std::vector<unsigned short>(9, 0))) { }
 
@@ -112,4 +113,34 @@ void Sudoku9::printBoard() {
         }
         std::cout << std::endl;
     }
+}
+
+bool Sudoku9::checkSolutionValidity() {
+    std::unordered_set<unsigned short> rowSet, colSet, boxSet;
+
+    for (int i = 0; i < 9; ++i) {
+        rowSet.clear();
+        colSet.clear();
+        boxSet.clear();
+        for (int j = 0; j < 9; ++j) {
+            if (board[i][j] != 0) {
+                if (rowSet.find(board[i][j]) != rowSet.end())
+                    return false;
+                rowSet.insert(board[i][j]);
+            }
+            if (board[j][i] != 0) {
+                if (colSet.find(board[j][i]) != colSet.end())
+                    return false;
+                colSet.insert(board[j][i]);
+            }
+            int boxRow = i - i % 3 + j / 3;
+            int boxCol = i * 3 % 9 + j % 3;
+            if (board[boxRow][boxCol] != 0) {
+                if (boxSet.find(board[boxRow][boxCol]) != boxSet.end())
+                    return false;
+                boxSet.insert(board[boxRow][boxCol]);
+            }
+        }
+    }
+    return true;
 }
