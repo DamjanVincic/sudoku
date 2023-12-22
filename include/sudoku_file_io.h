@@ -1,7 +1,7 @@
 /**
  * @file sudoku_file_io.h
  * @brief Declaration of the SudokuFileIO class
- * @date December 21, 2023
+ * @date December 22, 2023
  * @author Damjan Vincic
  */
 
@@ -18,7 +18,7 @@ class SudokuFileIO {
 public:
     /**
      * @brief Reads a sudoku board from a file.
-     * @return Sudoku9 object
+     * @return 2D vector representing the sudoku board
     */
     std::vector<std::vector<unsigned short>> read(const std::string& filename);
 

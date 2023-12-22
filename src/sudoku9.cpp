@@ -1,7 +1,7 @@
 /**
  * @file sudoku9.cpp
  * @brief Implementation file for the Sudoku9 class
- * @date December 21, 2023
+ * @date December 22, 2023
  * @author Damjan Vincic
  */
 
@@ -71,35 +71,6 @@ void Sudoku9::generateSudoku() {
     }
     originalBoard = board;
 }
-
-// void Sudoku9::checkSolution() {
-//     std::unordered_set<unsigned short> rowSet, colSet, boxSet;
-
-//     for (int i = 0; i < 9; ++i) {
-//         rowSet.clear();
-//         colSet.clear();
-//         boxSet.clear();
-//         for (int j = 0; j < 9; ++j) {
-//             if (board[i][j] != 0) {
-//                 if (rowSet.find(board[i][j]) != rowSet.end())
-//                     numberOfInvalidCells++;
-//                 rowSet.insert(board[i][j]);
-//             }
-//             if (board[j][i] != 0) {
-//                 if (colSet.find(board[j][i]) != colSet.end())
-//                     numberOfInvalidCells++;
-//                 colSet.insert(board[j][i]);
-//             }
-//             int boxRow = i - i % 3 + j / 3;
-//             int boxCol = i * 3 % 9 + j % 3;
-//             if (board[boxRow][boxCol] != 0) {
-//                 if (boxSet.find(board[boxRow][boxCol]) != boxSet.end())
-//                     numberOfInvalidCells++;
-//                 boxSet.insert(board[boxRow][boxCol]);
-//             }
-//         }
-//     }
-// }
 
 void Sudoku9::checkSolution() {
     unsigned short num;
