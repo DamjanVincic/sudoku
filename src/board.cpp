@@ -57,15 +57,13 @@ bool Board::isSafe(int row, int col, unsigned short num) {
 
 void Board::fillDiagonalSubgrids() {
     for (int i = 0; i < 9; i += 3) {
-        for (int num = 1; num <= 9; ++num) {
-            int row = rand() % 3 + i;
-            int col = rand() % 3 + i;
-
-            while (!isSafe(row, col, num)) {
-                row = rand() % 3 + i;
-                col = rand() % 3 + i;
+        for (int j = 0; j < 9; ++j) {
+            int num = rand() % 9 + 1;
+            while (!isSafe(i + j/3, i + j%3, num)) {
+                num = rand() % 9 + 1;
             }
-            board[row][col] = num;
+            board[i + j/3][i + j%3] = num;
+
         }
     }
 }
