@@ -24,7 +24,12 @@ int main(int argc, char* argv[]) {
 
         switch (choice) {
             case '1':
-                sudoku = sudokuFileIO.read(challengeFilename);
+                try {
+                    sudoku = sudokuFileIO.read(challengeFilename);
+                } catch (std::runtime_error& e) {
+                    std::cout << e.what() << std::endl;
+                    continue;
+                }
                 break;
             case '2':
                 sudoku.generateSudoku();
@@ -43,10 +48,18 @@ int main(int argc, char* argv[]) {
 
         switch(choice) {
             case '1':
-                sudoku.setSolution(sudokuFileIO.read(solutionFilename));
+                try {
+                    sudoku.setSolution(sudokuFileIO.read(solutionFilename));
+                } catch (std::runtime_error& e) {
+                    std::cout << e.what() << std::endl;
+                    continue;
+                }
                 break;
             case '2':
-                sudoku.solveSudoku();
+                if (!sudoku.solveSudoku()) {
+                    std::cout << "The sudoku is not solvable." << std::endl;
+                    continue;
+                }
                 sudokuFileIO.write(solutionFilename, sudoku);
                 break;
             default:
