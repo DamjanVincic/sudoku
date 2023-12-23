@@ -24,8 +24,10 @@ enable_testing()
 add_executable(sudoku_test
         tests/sudoku_test.cpp
         tests/board_test.cpp
+        tests/sudoku_file_io_test.cpp
         src/sudoku9.cpp
-        src/board.cpp)
+        src/board.cpp
+        src/sudoku_file_io.cpp)
 
 target_link_libraries(sudoku_test gtest_main)
 
