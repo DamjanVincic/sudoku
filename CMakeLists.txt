@@ -22,7 +22,9 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(sudoku_test
+        tests/sudoku_test.cpp
         tests/board_test.cpp
+        src/sudoku9.cpp
         src/board.cpp)
 
 target_link_libraries(sudoku_test gtest_main)
