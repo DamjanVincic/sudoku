@@ -11,3 +11,21 @@ add_executable(sudoku
         include/sudoku_file_io.h
         src/board.cpp
         include/board.h)
+
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(sudoku_test
+        tests/board_test.cpp
+        src/board.cpp)
+
+target_link_libraries(sudoku_test gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(sudoku_test)
