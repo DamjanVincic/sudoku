@@ -11,7 +11,6 @@
 
 int main(int argc, char* argv[]) {
     std::string challengeFilename = argv[1], solutionFilename = argv[2];
-    SudokuFileIO sudokuFileIO;
     Sudoku9 sudoku;
 
     char choice;
@@ -25,7 +24,7 @@ int main(int argc, char* argv[]) {
         switch (choice) {
             case '1':
                 try {
-                    sudoku = sudokuFileIO.read(challengeFilename);
+                    sudoku = SudokuFileIO::read(challengeFilename);
                 } catch (std::runtime_error& e) {
                     std::cout << e.what() << std::endl;
                     continue;
@@ -33,7 +32,7 @@ int main(int argc, char* argv[]) {
                 break;
             case '2':
                 sudoku.generateSudoku();
-                sudokuFileIO.write(challengeFilename, sudoku);
+                SudokuFileIO::write(challengeFilename, sudoku);
                 break;
             default:
                 std::cout << "Invalid input." << std::endl;
@@ -49,7 +48,7 @@ int main(int argc, char* argv[]) {
         switch(choice) {
             case '1':
                 try {
-                    sudoku.setSolution(sudokuFileIO.read(solutionFilename));
+                    sudoku.setSolution(SudokuFileIO::read(solutionFilename));
                 } catch (std::runtime_error& e) {
                     std::cout << e.what() << std::endl;
                     continue;
@@ -60,7 +59,7 @@ int main(int argc, char* argv[]) {
                     std::cout << "The sudoku is not solvable." << std::endl;
                     continue;
                 }
-                sudokuFileIO.write(solutionFilename, sudoku);
+                SudokuFileIO::write(solutionFilename, sudoku);
                 break;
             default:
                 std::cout << "Invalid input." << std::endl;

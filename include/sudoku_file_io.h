@@ -20,11 +20,11 @@ public:
      * @brief Reads a sudoku board from a file.
      * @return 2D vector representing the sudoku board
     */
-    std::vector<std::vector<unsigned short>> read(const std::string& filename);
+    static std::vector<std::vector<unsigned short>> read(const std::string& filename);
 
     /**
      * @brief Writes a sudoku board to a file.
     */
-    void write(const std::string& filename, const Sudoku9& sudoku);
+    static void write(const std::string& filename, const Sudoku9& sudoku);
 };
 #endif //SUDOKU_SUDOKU_FILE_IO_H
