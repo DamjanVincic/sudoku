@@ -10,28 +10,16 @@
 #include "../include/sudoku_file_io.h"
 
 /**
- * @class SudokuFileIOTest
- * @brief Unit tests for SudokuFileIO class
- */
-class SudokuFileIOTest : public ::testing::Test {
-protected:
-    SudokuFileIO sudokuFileIO;
-    void SetUp() override {
-        sudokuFileIO = SudokuFileIO();
-    }
-};
-
-/**
  * @brief Tests if the read method throws an exception when the file doesn't exist
  */
-TEST_F(SudokuFileIOTest, InvalidFileTest) {
-    ASSERT_THROW(sudokuFileIO.read("invalid_file.txt"), std::runtime_error);
+TEST(SudokuFileIOTest, InvalidFileTest) {
+    ASSERT_THROW(SudokuFileIO::read("invalid_file.txt"), std::runtime_error);
 }
 
 /**
  * @brief Tests if the read and write methods work correctly by writing a board and then reading it.
  */
-TEST_F(SudokuFileIOTest, ReadWriteTest) {
+TEST(SudokuFileIOTest, ReadWriteTest) {
     std::vector<std::vector<unsigned short>> testBoard = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -47,13 +35,13 @@ TEST_F(SudokuFileIOTest, ReadWriteTest) {
 
     std::ofstream file("test.txt");
     if (file.is_open()) {
-        sudokuFileIO.write("test.txt", sudoku);
+        SudokuFileIO::write("test.txt", sudoku);
         file.close();
     }
 
     std::ifstream file2("test.txt");
     if (file2.is_open()) {
-        std::vector<std::vector<unsigned short>> board = sudokuFileIO.read("test.txt");
+        std::vector<std::vector<unsigned short>> board = SudokuFileIO::read("test.txt");
         file2.close();
         ASSERT_EQ(board, testBoard);
     }

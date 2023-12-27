@@ -1,7 +1,7 @@
 /**
  * @file sudoku_file_io.h
  * @brief Declaration of the SudokuFileIO class
- * @date December 22, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
