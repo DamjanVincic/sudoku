@@ -39,7 +39,7 @@ bool Sudoku9::solveSudoku() {
     for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; ++j) {
             if (board[i][j] == 0) {
-                for (int num = 1; num <= 9; ++num) {
+                for (unsigned short num = 1; num <= 9; ++num) {
                     if (board.isSafe(i, j, num)) {
                         board[i][j] = num;
                         if (solveSudoku())
@@ -61,6 +61,7 @@ void Sudoku9::generateSudoku() {
     int max = 81 - 17; // At least 17 squares must be available
     int min = 81/2; // At least half of the squares to be removed for optimal difficulty
 //    int min = 9*3; // At least 3 numbers removed from each subgrid (on average)
+
     int numToRemove = rand() % (max - min + 1) + min;
     for (int i = 0; i < numToRemove; ++i) {
         int row = rand() % 9;

@@ -44,6 +44,15 @@ public:
     Board& operator=(const Board& other);
 
     /**
+     * @brief Checks if a number can be placed in a subgrid
+     * @param row Row of the cell
+     * @param col Column of the cell
+     * @param num Number to be placed
+     * @return True if the number can be placed, false otherwise.
+     */
+    bool isSubgridSafe(int row, int col, unsigned short num);
+
+    /**
      * @brief Checks if a number can be placed in a given cell
      * @param row Row of the cell
      * @param col Column of the cell
@@ -52,7 +61,6 @@ public:
      */
     bool isSafe(int row, int col, unsigned short num);
 
-    
     /**
      * Function fills the 3 diagonal 3x3 subgrids with random numbers,
      * we don't need to check if number is safe to put in row or column,

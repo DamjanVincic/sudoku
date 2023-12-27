@@ -22,13 +22,7 @@ Board& Board::operator=(const Board& other) {
     return *this;
 }
 
-bool Board::isSafe(int row, int col, unsigned short num) {
-    // Check if the number is already in the row or column
-    for (int i = 0; i < 9; ++i) {
-        if (board[row][i] == num || board[i][col] == num)
-            return false;
-    }
-
+bool Board::isSubgridSafe(int row, int col, unsigned short num) {
     // Check if the number is already in the 3x3 box
     int boxRow = row - row % 3;
     int boxCol = col - col % 3;
@@ -38,15 +32,25 @@ bool Board::isSafe(int row, int col, unsigned short num) {
                 return false;
         }
     }
-
     return true;
+}
+
+bool Board::isSafe(int row, int col, unsigned short num) {
+    // Check if the number is already in the row or column
+    for (int i = 0; i < 9; ++i) {
+        if (board[row][i] == num || board[i][col] == num)
+            return false;
+    }
+
+    // Since we already checked rows and columns, if the subgrid is safe, the number can be placed
+    return isSubgridSafe(row, col, num);
 }
 
 void Board::fillDiagonalSubgrids() {
     for (int i = 0; i < 9; i += 3) {
         for (int j = 0; j < 9; ++j) {
             int num = rand() % 9 + 1;
-            while (!isSafe(i + j/3, i + j%3, num)) {
+            while (!isSubgridSafe(i + j/3, i + j%3, num)) {
                 num = rand() % 9 + 1;
             }
             board[i + j/3][i + j%3] = num;
