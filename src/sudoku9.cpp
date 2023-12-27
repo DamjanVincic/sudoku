@@ -79,6 +79,11 @@ bool Sudoku9::checkSolution() {
     unsigned short num;
     for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; ++j) {
+            if (board[i][j] == 0) {
+                // Solution is not complete
+                return false;
+            }
+
             if (originalBoard[i][j] == 0) {
                 num = board[i][j];
                 board[i][j] = 0;
@@ -88,6 +93,7 @@ bool Sudoku9::checkSolution() {
                     ++numberOfInvalidCells;
                 board[i][j] = num;
             } else if (originalBoard[i][j] != board[i][j]) {
+                // Solution board isn't the same as the original one
                 return false;
             }
         }
