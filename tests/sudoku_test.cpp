@@ -1,16 +1,27 @@
 /**
  * @file sudoku_test.cpp
  * @brief Unit tests for the Sudoku9 class
- * @date December 23, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
 #include <gtest/gtest.h>
 #include "../include/sudoku9.h"
 
+/**
+ * @class SudokuTest
+ * @brief Unit tests for Sudoku9 class
+ */
 class SudokuTest : public ::testing::Test {
 protected:
+    /**
+     * @brief 2D vector representing the sudoku board
+     */
     std::vector<std::vector<unsigned short>> testBoard;
+
+    /**
+     * @brief Sudoku9 object representing the sudoku board
+     */
     Sudoku9 sudoku;
     void SetUp() override {
         testBoard = {
@@ -28,15 +39,24 @@ protected:
     }
 };
 
+/**
+ * @brief Test for the empty constructor
+ */
 TEST_F(SudokuTest, EmptyConstructorTest) {
     Sudoku9 sudoku;
     ASSERT_EQ(sudoku.getBoard().getBoard(), sudoku.getOriginalBoard().getBoard());
 }
 
+/**
+ * @brief Test for the constructor with parameters
+ */
 TEST_F(SudokuTest, ConstructorTest) {
     ASSERT_EQ(sudoku.getBoard().getBoard(), testBoard);
 }
 
+/**
+ * @brief Tests if the sudoku solving works correctly
+ */
 TEST_F(SudokuTest, SolveSudokuTest) {
     std::vector<std::vector<unsigned short>> unsolvableBoard = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
@@ -54,12 +74,18 @@ TEST_F(SudokuTest, SolveSudokuTest) {
     ASSERT_FALSE(Sudoku9(unsolvableBoard).solveSudoku());
 }
 
+/**
+ * @brief Tests if the board generation works correctly
+ */
 TEST_F(SudokuTest, GenerateSudokuTest) {
     Sudoku9 sudoku;
     sudoku.generateSudoku();
     ASSERT_TRUE(sudoku.solveSudoku());
 }
 
+/**
+ * @brief Tests if the solution checking works correctly
+ */
 TEST_F(SudokuTest, CheckSolutionTest) {
     std::vector<std::vector<unsigned short>> solvedBoard = {
             {5, 3, 4, 6, 7, 8, 9, 1, 2},

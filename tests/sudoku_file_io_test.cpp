@@ -1,7 +1,7 @@
 /**
  * @file sudoku_file_io_test.cpp
  * @brief Unit tests for the SudokuFileIO class
- * @date December 23, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
@@ -9,6 +9,10 @@
 #include <fstream>
 #include "../include/sudoku_file_io.h"
 
+/**
+ * @class SudokuFileIOTest
+ * @brief Unit tests for SudokuFileIO class
+ */
 class SudokuFileIOTest : public ::testing::Test {
 protected:
     SudokuFileIO sudokuFileIO;
@@ -17,10 +21,16 @@ protected:
     }
 };
 
+/**
+ * @brief Tests if the read method throws an exception when the file doesn't exist
+ */
 TEST_F(SudokuFileIOTest, InvalidFileTest) {
     ASSERT_THROW(sudokuFileIO.read("invalid_file.txt"), std::runtime_error);
 }
 
+/**
+ * @brief Tests if the read and write methods work correctly by writing a board and then reading it.
+ */
 TEST_F(SudokuFileIOTest, ReadWriteTest) {
     std::vector<std::vector<unsigned short>> testBoard = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},

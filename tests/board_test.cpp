@@ -1,7 +1,7 @@
 /*
  * @file board_test.cpp
  * @brief Unit tests for the Board class
- * @date December 22, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
@@ -9,9 +9,20 @@
 #include "../include/board.h"
 #include <vector>
 
+/**
+ * @class BoardTest
+ * @brief Unit tests for Board class
+ */
 class BoardTest : public ::testing::Test {
 protected:
+    /**
+     * @brief 2D vector representing the sudoku board
+     */
     std::vector<std::vector<unsigned short>> testBoard;
+
+    /**
+     * @brief Board object representing the sudoku board
+     */
     Board board;
     void SetUp() override {
         testBoard = {
@@ -29,21 +40,33 @@ protected:
     }
 };
 
+/**
+ * @brief Test for the empty constructor
+ */
 TEST_F(BoardTest, EmptyConstructorTest) {
     Board board;
     ASSERT_EQ(board.getBoard(), std::vector<std::vector<unsigned short>>(9, std::vector<unsigned short>(9, 0)));
 }
 
+/**
+ * @brief Test for the constructor with parameters
+ */
 TEST_F(BoardTest, ConstructorTest) {
     Board board(testBoard);
     ASSERT_EQ(board.getBoard(), testBoard);
 }
 
+/**
+ * @brief Test for the copy constructor
+ */
 TEST_F(BoardTest, CopyConstructorTest) {
     Board boardCopy(board);
     ASSERT_EQ(boardCopy.getBoard(), board.getBoard());
 }
 
+/**
+ * @brief Tests if the method for checking if a number can be placed works correctly
+ */
 TEST_F(BoardTest, IsSafeTest) {
     ASSERT_TRUE(board.isSafe(0, 2, 4));
     ASSERT_TRUE(board.isSafe(0, 2, 1));
@@ -56,6 +79,9 @@ TEST_F(BoardTest, IsSafeTest) {
     ASSERT_FALSE(board.isSafe(0, 2, 9));
 }
 
+/**
+ * @brief Tests if diagonal subgrid filling works correctly
+ */
 TEST_F(BoardTest, FillDiagonalSubgridsTest) {
     Board board;
     board.fillDiagonalSubgrids();
