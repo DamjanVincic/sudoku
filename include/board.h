@@ -1,7 +1,7 @@
 /**
  * @file board.h
  * @brief Declaration of the Board class
- * @date December 21, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
 */
 
@@ -25,21 +25,21 @@ public:
     Board();
 
     /**
-     * @brief Constructor for the Board class
-     * @param board 2D vector representing the sudoku board
-     */
-    Board(const std::vector<std::vector<unsigned short>>& board);
-
-    /**
      * @brief Copy constructor for the Board class
      * @param other The other Board object to be copied
      */
     Board(const Board& other);
 
     /**
+     * @brief Constructor for the Board class
+     * @param board 2D vector representing the sudoku board
+     */
+    Board(const std::vector<std::vector<unsigned short>>& board);
+
+    /**
      * @brief Assignment operator for the Board class
      * @param other The other Board object to be copied.
-     * @return
+     * @return The copied Board object.
      */
     Board& operator=(const Board& other);
 
@@ -51,14 +51,18 @@ public:
      * @return True if the number can be placed, false otherwise
      */
     bool isSafe(int row, int col, unsigned short num);
+
     
     /**
+     * Function fills the 3 diagonal 3x3 subgrids with random numbers,
+     * we don't need to check if number is safe to put in row or column,
+     * only in the 3x3 subgrid.
      * @brief Fill the diagonal subgrids of the sudoku board
      */
     void fillDiagonalSubgrids();
 
     /**
-     * @brief Print the sudoku board
+     * @brief Prints the sudoku board
     */
     void print();
 

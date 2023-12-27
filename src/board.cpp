@@ -1,7 +1,7 @@
 /**
  * @file board.cpp
  * @brief Implementation file for the Board class
- * @date December 21, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
 */
 
@@ -11,26 +11,13 @@
 
 Board::Board() : board(std::vector<std::vector<unsigned short>>(9, std::vector<unsigned short>(9, 0))) { }
 
-Board::Board(const std::vector<std::vector<unsigned short>>& board) : board(std::vector<std::vector<unsigned short>>(9, std::vector<unsigned short>(9, 0))) {
-    for (int i = 0; i < 9; ++i) {
-        for (int j = 0; j < 9; j++)
-            this->board[i][j] = board[i][j];
-    }
-}
+Board::Board(const std::vector<std::vector<unsigned short>>& board) : board(board) { }
 
-Board::Board(const Board& other) : board(std::vector<std::vector<unsigned short>>(9, std::vector<unsigned short>(9, 0))) {
-    for (int i = 0; i < 9; ++i) {
-        for (int j = 0; j < 9; j++)
-            board[i][j] = other[i][j];
-    }
-}
+Board::Board(const Board& other) : board(other.getBoard()) { }
 
 Board& Board::operator=(const Board& other) {
     if (this != &other) {
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; j++)
-                board[i][j] = other[i][j];
-        }
+        board = other.getBoard();
     }
     return *this;
 }
@@ -63,7 +50,6 @@ void Board::fillDiagonalSubgrids() {
                 num = rand() % 9 + 1;
             }
             board[i + j/3][i + j%3] = num;
-
         }
     }
 }
