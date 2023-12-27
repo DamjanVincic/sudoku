@@ -58,13 +58,24 @@ void Board::fillDiagonalSubgrids() {
     }
 }
 
-void Board::print() {
-    for (std::vector<unsigned short>& row : board) {
-        for (unsigned short& num : row) {
-            std::cout << num << " ";
+std::ostream& operator<<(std::ostream& os, const Board& board) {
+    for (int i = 0; i < 9; ++i) {
+        if (i % 3 == 0 && i != 0) {
+            os << "------+-------+------" << std::endl;
         }
-        std::cout << std::endl;
+        for (int j = 0; j < 9; ++j) {
+            if (j % 3 == 0 && j != 0) {
+                os << "| ";
+            }
+            if (board[i][j] == 0)
+                os << '.';
+            else
+                os << board[i][j];
+            os << " ";
+        }
+        os << std::endl;
     }
+    return os;
 }
 
 std::vector<std::vector<unsigned short>> Board::getBoard() const {

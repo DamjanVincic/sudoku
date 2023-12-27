@@ -68,6 +68,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (sudoku.checkSolution()) {
+            std::cout << sudoku.getBoard() << std::endl;
             std::cout << "Number of valid cells: " << sudoku.getNumberOfValidCells() << std::endl;
             std::cout << "Number of invalid cells: " << sudoku.getNumberOfInvalidCells() << std::endl;
             std::cout << "Number of games played: " << ++Sudoku9::numberOfGamesPlayed() << std::endl;

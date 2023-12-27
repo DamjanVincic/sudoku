@@ -8,6 +8,7 @@
 #ifndef SUDOKU_BOARD_H
 #define SUDOKU_BOARD_H
 #include <vector>
+#include <ostream>
 
 /**
  * @class Board
@@ -18,7 +19,17 @@ class Board {
      * @brief 2D vector representing the sudoku board
      */
     std::vector<std::vector<unsigned short>> board;
+
+    /**
+     * @brief Checks if a number can be placed in a subgrid
+     * @param row Row of the cell
+     * @param col Column of the cell
+     * @param num Number to be placed
+     * @return True if the number can be placed, false otherwise.
+     */
+    bool isSubgridSafe(int row, int col, unsigned short num);
 public:
+
     /**
      * @brief Empty constructor for the Board class
      */
@@ -44,15 +55,6 @@ public:
     Board& operator=(const Board& other);
 
     /**
-     * @brief Checks if a number can be placed in a subgrid
-     * @param row Row of the cell
-     * @param col Column of the cell
-     * @param num Number to be placed
-     * @return True if the number can be placed, false otherwise.
-     */
-    bool isSubgridSafe(int row, int col, unsigned short num);
-
-    /**
      * @brief Checks if a number can be placed in a given cell
      * @param row Row of the cell
      * @param col Column of the cell
@@ -70,15 +72,18 @@ public:
     void fillDiagonalSubgrids();
 
     /**
-     * @brief Prints the sudoku board
-    */
-    void print();
-
-    /**
      * @brief Returns the sudoku board
      * @return The sudoku board
      */
     std::vector<std::vector<unsigned short>> getBoard() const;
+
+    /**
+     * @brief Prints the sudoku board
+     * @param os Output stream
+     * @param board Board to be printed
+     * @return The forwarded output stream
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Board& board);
 
     std::vector<unsigned short>& operator[](int i);
     const std::vector<unsigned short>& operator[](int i) const;
