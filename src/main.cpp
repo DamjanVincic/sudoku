@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @brief Main file of the program
- * @date December 21, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
 */
 
@@ -67,10 +67,13 @@ int main(int argc, char* argv[]) {
                 continue;
         }
 
-        sudoku.checkSolution();
-        std::cout << "Number of valid cells: " << sudoku.getNumberOfValidCells() << std::endl;
-        std::cout << "Number of invalid cells: " << sudoku.getNumberOfInvalidCells() << std::endl;
-        std::cout << "Number of games played: " << ++Sudoku9::numberOfGamesPlayed() << std::endl;
+        if (sudoku.checkSolution()) {
+            std::cout << "Number of valid cells: " << sudoku.getNumberOfValidCells() << std::endl;
+            std::cout << "Number of invalid cells: " << sudoku.getNumberOfInvalidCells() << std::endl;
+            std::cout << "Number of games played: " << ++Sudoku9::numberOfGamesPlayed() << std::endl;
+        } else {
+            std::cout << "The solution and the original board are not the same." << std::endl;
+        }
 
         std::cout << "[1] Continue\n"
                      "[2] Exit\n"

@@ -75,7 +75,7 @@ void Sudoku9::generateSudoku() {
     originalBoard = board;
 }
 
-void Sudoku9::checkSolution() {
+bool Sudoku9::checkSolution() {
     unsigned short num;
     for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; ++j) {
@@ -87,9 +87,12 @@ void Sudoku9::checkSolution() {
                 else
                     ++numberOfInvalidCells;
                 board[i][j] = num;
+            } else if (originalBoard[i][j] != board[i][j]) {
+                return false;
             }
         }
     }
+    return true;
 }
 
 int Sudoku9::getNumberOfValidCells() const {

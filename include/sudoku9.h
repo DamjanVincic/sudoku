@@ -98,8 +98,9 @@ public:
      * Goes through empty cells in the original sudoku board, since those are the cells to be filled by the user.
      * Then checks if numbers in those cells are valid according to the rules, and updates the corresponding attributes.
      * @brief Checks if the sudoku board is solved, and updates the corresponding attributes.
+     * @return True if the sudoku board is the same as the original board, false otherwise
     */
-    void checkSolution();
+    bool checkSolution();
 
     /**
      * @brief Returns the number of valid cells
