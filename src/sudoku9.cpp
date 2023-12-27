@@ -1,7 +1,7 @@
 /**
  * @file sudoku9.cpp
  * @brief Implementation file for the Sudoku9 class
- * @date December 22, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
@@ -9,6 +9,8 @@
 #include <iostream>
 
 Sudoku9::Sudoku9() : originalBoard(), board() { }
+
+Sudoku9::Sudoku9(const Sudoku9& other) : originalBoard(other.getOriginalBoard()), board(other.getBoard()) { }
 
 Sudoku9::Sudoku9(const std::vector<std::vector<unsigned short>>& board) : originalBoard(board), board(board) { }
 

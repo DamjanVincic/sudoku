@@ -1,7 +1,7 @@
 /**
  * @file sudoku9.h
  * @brief Declaration of the Sudoku9 class
- * @date December 21, 2023
+ * @date December 27, 2023
  * @author Damjan Vincic
  */
 
@@ -46,14 +46,22 @@ public:
     Sudoku9();
 
     /**
+     * @brief Copy constructor for the Sudoku9 class
+     * @param other Sudoku9 object to be copied
+     * @return The copied Sudoku9 object
+     */
+    Sudoku9(const Sudoku9& other);
+
+    /**
      * @brief Constructor for the Sudoku9 class
      * @param board 2D vector representing the sudoku board
      */
     Sudoku9(const std::vector<std::vector<unsigned short>>& board);
 
     /**
-     * @brief Copy constructor for the Sudoku9 class
-     * @param other Sudoku9 object to be copied
+     * @brief Assignment operator for the Sudoku9 class
+     * @param other Sudoku9 object to be assigned
+     * @return The assigned Sudoku9 object
      */
     Sudoku9& operator=(const Sudoku9& other);
 
@@ -70,17 +78,25 @@ public:
     Board getBoard() const;
 
     /**
+     * Solves the sudoku board using the backtracking algorithm.
+     * Tries numbers from 1 to 9 in empty cells, if neither number is valid in a cell, goes back to the previous cell.
      * @brief Solves the sudoku board
      * @return True if the sudoku is solved, false otherwise
      */
     bool solveSudoku();
 
     /**
+     * Fills the diagonal subgrids of the sudoku board with random numbers,
+     * since we don't need to check if number is safe to put in row or column, only in the 3x3 subgrid.
+     * Then removes between 40 and 64 numbers from the sudoku board.
+     * Since there must be at least 17 starting numbers for a board to be valid.
      * @brief Generates a sudoku board
      */
     void generateSudoku();
 
     /**
+     * Goes through empty cells in the original sudoku board, since those are the cells to be filled by the user.
+     * Then checks if numbers in those cells are valid according to the rules, and updates the corresponding attributes.
      * @brief Checks if the sudoku board is solved, and updates the corresponding attributes.
     */
     void checkSolution();
