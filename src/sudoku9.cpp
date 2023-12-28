@@ -1,7 +1,7 @@
 /**
  * @file sudoku9.cpp
  * @brief Implementation file for the Sudoku9 class
- * @date December 27, 2023
+ * @date December 28, 2023
  * @author Damjan Vincic
  */
 
@@ -16,10 +16,6 @@ Sudoku9::Sudoku9(const std::vector<std::vector<unsigned short>>& board) : origin
 
 Sudoku9& Sudoku9::operator=(const Sudoku9& other) {
     if (this != &other) {
-        // for (int i = 0; i < 9; ++i) {
-        //     for (int j = 0; j < 9; ++j)
-        //         board[i][j] = other[i][j];
-        // }
         board = other.getBoard();
         originalBoard = other.getOriginalBoard();
         numberOfValidCells = numberOfInvalidCells = 0;
